@@ -133,9 +133,8 @@ int shellExecute(char **args)
     return commandLauncher(args);
 }
 
-int main()
+void shellInterface()
 {
-
     char *line;
     char **args;
     char currDirectory[100];
@@ -148,6 +147,10 @@ int main()
         args = lineParser(line);
         status = shellExecute(args);
     }
+}
 
+int main()
+{
+    shellInterface();
     return 0;
 }
