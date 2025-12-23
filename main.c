@@ -12,6 +12,7 @@ int shellExit(char **args);
 
 char *shellCommandBuiltinStr[] = {
     "help",
+    "cd",
     "exit"};
 
 int shellHelp(char **args)
@@ -26,6 +27,12 @@ int shellHelp(char **args)
     return 1;
 }
 
+int shellChangeDirectory(char **args)
+{
+    chdir(args[1]);
+    return 1;
+}
+
 int shellExit(char **args)
 {
     printf("EXITING...\n");
@@ -34,6 +41,7 @@ int shellExit(char **args)
 
 int (*shellCommandBuiltinFunc[])(char **) = {
     &shellHelp,
+    &shellChangeDirectory,
     &shellExit};
 
 char *stdinReader()
@@ -130,11 +138,12 @@ int main()
 
     char *line;
     char **args;
+    char currDirectory[100];
 
     int status = 1;
     while (status)
     {
-        printf("(Franmios): ");
+        printf("(Franmios) - %s: ", getcwd(currDirectory, 100));
         line = stdinReader();
         args = lineParser(line);
         status = shellExecute(args);
