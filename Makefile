@@ -5,7 +5,7 @@ CC = gcc
 
 ## Variables
 
-SRC = 	main.c franmios.c
+SRC = 	main.c franmios.c ppm2Ascii.c
 
 OBJDIR = obj
 
@@ -23,7 +23,7 @@ all: $(NAME)
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: %.c franmios.h | $(OBJDIR)
+$(OBJDIR)/%.o: %.c franmios.h ppm2Ascii.h | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)

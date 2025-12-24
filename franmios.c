@@ -1,11 +1,11 @@
 #include "franmios.h"
+#include "ppm2Ascii.h"
 
 char *shellCommandBuiltinStr[] = {
     "help",
     "cd",
-    "exit"
-};
-
+    "p2a",
+    "exit"};
 
 int shellHelp(char **args)
 {
@@ -16,6 +16,13 @@ int shellHelp(char **args)
         printf("%s\n", shellCommandBuiltinStr[i]);
     }
     printf("**************************************************\n");
+    return 1;
+}
+
+int ppm2Ascii(char **args)
+{
+    (void)args;
+    ppm2AsciiWrapper(args[1]);
     return 1;
 }
 
@@ -42,8 +49,8 @@ int shellExit(char **args)
 int (*shellCommandBuiltinFunc[])(char **) = {
     &shellHelp,
     &shellChangeDirectory,
-    &shellExit
-};
+    &ppm2Ascii,
+    &shellExit};
 
 char *stdinReader(void)
 {
@@ -110,7 +117,7 @@ int commandLauncher(char **args)
 
 int shellExecute(char **args)
 {
-    
+
     if (args[0] == NULL)
     {
         return 1;
